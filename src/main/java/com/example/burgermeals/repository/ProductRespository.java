@@ -1,9 +1,7 @@
 package com.example.burgermeals.repository;
 
-import com.example.burgermeals.entity.Plant;
 import com.example.burgermeals.model.Product;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
 import java.math.BigInteger;
 
@@ -18,5 +16,5 @@ import java.math.BigInteger;
  * Confidencial y debe usarla de acuerdo con los términos de aceptación de
  * licencia de uso que firmó con Byte.
  */
-public interface ProductRespository extends JpaRepository<Product, BigInteger> {
+public interface ProductRespository extends CrudRepository<Product, BigInteger> {
 }

@@ -190,4 +190,16 @@ public abstract class BaseService<T, Bean, PK> {
     protected boolean existsByUK(Bean bean) {
         return false;
     }
+
+    public List<Bean> searchAllByRsql(String search) {
+        Node rootNode = new RSQLParser().parse(search);
+        Specification<T> spec = rootNode.accept(new CustomRsqlVisitor<>());
+
+        List<T> list = ((JpaSpecificationExecutor) repository).findAll(spec);
+        List<Bean> beanList = new ArrayList<>();
+        for (T t : list) {
+            beanList.add(toBean(t));
+        }
+        return beanList;
+    }
 }

@@ -1,13 +1,16 @@
 package com.example.burgermeals.service;
 
+import com.example.burgermeals.base.BaseService;
 import com.example.burgermeals.bean.ProductBean;
 import com.example.burgermeals.enums.ItemState;
 import com.example.burgermeals.model.Product;
 import com.example.burgermeals.model.ProductType;
 import com.example.burgermeals.repository.ProductRespository;
 import com.example.burgermeals.repository.ProductTypeRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -29,14 +32,14 @@ import java.util.Optional;
  */
 @Service
 @Transactional
-public class ProductService {
+@Log4j2
+public class ProductService extends BaseService<Product, ProductBean, BigInteger> {
 
-    @Autowired
-    private ProductRespository productRespository;
+    protected ProductService(ProductRespository repository) {
+        super(repository);
+    }
 
-    @Autowired
-    private ProductTypeRepository productTypeRepository;
-
+    @Override
     protected Product toModel(Product model, ProductBean bean) {
         if (model == null) {
             model = new Product();
@@ -47,41 +50,12 @@ public class ProductService {
         return model;
     }
 
+    @Override
     protected ProductBean toBean(Product model) {
         ProductBean bean = new ProductBean();
         BeanUtils.copyProperties(model, bean);
         bean.setStatus(model.getStatus().getName());
         return bean;
     }
-
-    public List<ProductBean> geAll(){
-        List<ProductBean> productBeanList = new ArrayList<>();
-        List<Product> productList = productRespository.findAll();
-
-        for(Product product : productList){
-            productBeanList.add(toBean(product));
-        }
-        return productBeanList;
-    }
-
-    public Product save(ProductBean productBean) {
-        Product product = new Product();
-        if(productBean.getId() != null){
-            Optional<Product> productOptional = productRespository.findById(productBean.getId());
-            if(productOptional.isPresent()){
-                product = productOptional.get();
-            }
-        }
-        product = toModel(product, productBean);
-        return productRespository.save(product);
-    }
-
-    public void delete(BigInteger id){
-        Optional<Product> productOptional = productRespository.findById(id);
-        if(productOptional.isPresent()){
-            productRespository.delete(productOptional.get());
-        }
-    }
-
 
 }
