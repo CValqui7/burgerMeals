@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    context-path: ${APPLICATION_PATH:/burger-meals}
+    web:
+      static-content-location: file:/D:/Universidad/2022-1/Integrador 2/burger-meals-html/dist/burger-meals-html/
+      #static-content-location: "D:\\Universidad\\2022-1\\Integrador 2\\burger-meals-html\\dist\\burger-meals-html"
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/BM_BASE?zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    username: BM_BASE
+    password: BM_BASE99
+
+
