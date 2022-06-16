@@ -1,8 +1,6 @@
 package com.example.burgermeals.controller;
 
-import com.example.burgermeals.model.Product;
 import com.example.burgermeals.model.ProductType;
-import com.example.burgermeals.repository.ProductRespository;
 import com.example.burgermeals.repository.ProductTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

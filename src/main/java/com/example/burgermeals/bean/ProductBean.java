@@ -1,6 +1,5 @@
 package com.example.burgermeals.bean;
 
-import com.example.burgermeals.enums.ItemState;
 import com.google.gson.annotations.Expose;
 import lombok.Getter;
 import lombok.Setter;

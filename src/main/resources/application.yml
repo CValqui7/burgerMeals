@@ -18,4 +18,9 @@ spring:
     username: BM_BASE
     password: BM_BASE99
 
+  #security:
+  #  user:
+  #    name: cvalqui
+  #    password: cvalqui1
+
 
