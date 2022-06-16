@@ -23,7 +23,7 @@ class BurgerMealsApplicationTests {
     void contextLoads() {
     }
 
-    @Test void createUser() {
+    @Test void createUser() {/*
         User us = new User();
         BigInteger bigInteger = BigInteger.valueOf(1);
         us.setId("73030112");
@@ -34,7 +34,7 @@ class BurgerMealsApplicationTests {
         us.setSecondLastName("Cabrera");
         us.setState(ItemState.ACTIVE);
         us.setPassword(encoder.encode("123"));
-        User usuario = userRepository.save(us);
+        User usuario = userRepository.save(us);*/
 
     }
 
