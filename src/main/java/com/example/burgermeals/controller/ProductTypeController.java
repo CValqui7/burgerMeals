@@ -1,7 +1,11 @@
 package com.example.burgermeals.controller;
 
+import com.example.burgermeals.base.BaseService;
+import com.example.burgermeals.base.BasicXDFController;
+import com.example.burgermeals.bean.ProductBean;
 import com.example.burgermeals.model.ProductType;
 import com.example.burgermeals.repository.ProductTypeRepository;
+import com.example.burgermeals.service.ProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -24,14 +29,10 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("product-type")
-public class ProductTypeController {
-    @Autowired
-    ProductTypeRepository productTypeRepository;
-
-    @GetMapping
-    public ResponseEntity<List<ProductType>> getAll() {
-        List<ProductType> plantList = productTypeRepository.findAll();
-        return ResponseEntity.ok(plantList);
+@RequestMapping("/service/product-type")
+public class ProductTypeController extends BasicXDFController<ProductType, BigInteger> {
+    public ProductTypeController(ProductTypeService service) {
+        super(service);
     }
+
 }

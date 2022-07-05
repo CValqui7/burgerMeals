@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 /**
  * @author Cristian J. Valqui Cabrera
- * @version 18/05/2022
+ * @version 02/07/2022
  * <p>
  * Copyright (c) 2022 CValqui, S.A. Todos los derechos reservados.
  * <p>
@@ -20,8 +23,9 @@ import java.math.BigInteger;
  */
 @Getter
 @Setter
-public class ProductTypeBean implements Serializable {
+public class VoucherBean implements Serializable {
     @Expose private BigInteger id;
-    @Expose private String name;
-    @Expose private String description;
+    @Expose private OffsetDateTime creationDate;
+    @Expose private BigDecimal totalPrice;
+    @Expose private List<VoucherDetailBean> voucherDetailList;
 }

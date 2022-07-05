@@ -43,7 +43,7 @@ public abstract class BasicXDFController<BEAN, PK> {
             return new ResponseEntity<>(gson.toJson(actualBean), HttpStatus.CONFLICT);
         }
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gson.toJson(bean), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
@@ -65,7 +65,7 @@ public abstract class BasicXDFController<BEAN, PK> {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> delete(@PathVariable("id") PK id, HttpServletRequest req) {
         service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gson.toJson(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)

@@ -9,7 +9,7 @@ import java.math.BigInteger;
 
 /**
  * @author Cristian J. Valqui Cabrera
- * @version 18/05/2022
+ * @version 02/07/2022
  * <p>
  * Copyright (c) 2022 CValqui, S.A. Todos los derechos reservados.
  * <p>
@@ -18,10 +18,11 @@ import java.math.BigInteger;
  * Confidencial y debe usarla de acuerdo con los términos de aceptación de
  * licencia de uso que firmó con Byte.
  */
-@Getter
-@Setter
-public class ProductTypeBean implements Serializable {
+@Getter @Setter
+public class VoucherDetailBean implements Serializable {
     @Expose private BigInteger id;
-    @Expose private String name;
-    @Expose private String description;
+    @Expose private VoucherBean voucher;
+    @Expose private ProductBean product;
+    @Expose private BigInteger productId;
+    @Expose private int quantity;
 }

@@ -52,7 +52,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage())).and();
 
         http.authorizeRequests()
-                .antMatchers("/api/login").permitAll()
+                .antMatchers("/service/user/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(sessionFilter, UsernamePasswordAuthenticationFilter.class);

@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  * licencia de uso que firmó con Byte.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/service/user")
 public class AuthenticationController {
     @Autowired
     protected Gson gson;

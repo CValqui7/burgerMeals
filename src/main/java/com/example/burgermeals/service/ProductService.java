@@ -3,6 +3,7 @@ package com.example.burgermeals.service;
 import com.example.burgermeals.base.BaseService;
 import com.example.burgermeals.bean.ProductBean;
 import com.example.burgermeals.enums.ItemState;
+import com.example.burgermeals.exception.NotFoundException;
 import com.example.burgermeals.model.Product;
 import com.example.burgermeals.model.ProductType;
 import com.example.burgermeals.repository.ProductRespository;
@@ -34,6 +35,14 @@ import java.util.Optional;
 @Transactional
 @Log4j2
 public class ProductService extends BaseService<Product, ProductBean, BigInteger> {
+    @Autowired
+    ProductRespository productRespository;
+
+    @Autowired
+    ProductTypeRepository productTypeRepository;
+
+    @Autowired
+    private ProductTypeService productTypeService;
 
     protected ProductService(ProductRespository repository) {
         super(repository);
@@ -46,7 +55,14 @@ public class ProductService extends BaseService<Product, ProductBean, BigInteger
         }
         BeanUtils.copyProperties(bean, model);
         model.setStatus(ItemState.fromString(bean.getStatus()));
-
+        if (bean.getProductTypeBean() == null) {
+            throw new NullPointerException();
+        }
+        Optional<ProductType> productTypeOptional = productTypeRepository.findById(bean.getProductTypeBean().getId());
+        if (!productTypeOptional.isPresent()) {
+            throw new NotFoundException("No se encontro el tipo de producto seleccionado.");
+        }
+        model.setTypeProduct(productTypeOptional.get());
         return model;
     }
 
@@ -54,8 +70,31 @@ public class ProductService extends BaseService<Product, ProductBean, BigInteger
     protected ProductBean toBean(Product model) {
         ProductBean bean = new ProductBean();
         BeanUtils.copyProperties(model, bean);
+        bean.setProductTypeBean(productTypeService.toBean(model.getTypeProduct()));
         bean.setStatus(model.getStatus().getName());
         return bean;
+    }
+
+    protected ProductBean updateStatus(ProductBean productBean, boolean status) {
+        Optional<Product> productOptional = productRespository.findById(productBean.getId());
+
+        if (!productOptional.isPresent()) {
+            throw new NotFoundException("Product is not found");
+        }
+
+        return productBean;
+    }
+
+    public List<ProductBean> getAllActive() {
+        List<Product> productList = productRespository.findAllByStatus(ItemState.ACTIVE);
+        List<ProductBean> productBeanList = new ArrayList<>();
+
+        for (Product product : productList) {
+            ProductBean productBean= toBean(product);
+            productBeanList.add(productBean);
+        }
+
+        return productBeanList;
     }
 
 }

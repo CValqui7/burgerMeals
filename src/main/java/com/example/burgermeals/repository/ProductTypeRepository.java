@@ -1,8 +1,8 @@
 package com.example.burgermeals.repository;
 
-import com.example.burgermeals.model.Product;
 import com.example.burgermeals.model.ProductType;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.math.BigInteger;
 
 /**
  * @author Cristian J. Valqui Cabrera
@@ -15,5 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Confidencial y debe usarla de acuerdo con los términos de aceptación de
  * licencia de uso que firmó con Byte.
  */
-public interface ProductTypeRepository extends JpaRepository<ProductType, Integer> {
+public interface ProductTypeRepository extends JpaRepository<ProductType, BigInteger> {
 }

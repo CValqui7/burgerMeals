@@ -1,5 +1,6 @@
 package com.example.burgermeals.bean;
 
+import com.example.burgermeals.model.ProductType;
 import com.google.gson.annotations.Expose;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,27 +22,12 @@ import java.math.BigInteger;
 @Getter
 @Setter
 public class ProductBean implements Serializable {
-    @Expose
-    private BigInteger id;
-
-    @Expose
-    private String name;
-
-    @Expose
-    private String description;
-
-    @Expose
-    private double precio;
-
-    @Expose
-    private double descuento;
-
-    @Expose
-    private String status;
-
-    @Expose
-    private String image;
-
-    @Expose
-    private long version;
-}
+    @Expose private BigInteger id;
+    @Expose private String name;
+    @Expose private String description;
+    @Expose private double precio;
+    @Expose private double descuento;
+    @Expose private String status;
+    @Expose private String image;
+    @Expose private ProductTypeBean productTypeBean;
+    @Expose private long version;}

@@ -32,8 +32,8 @@ import java.math.BigInteger;
 public class Product implements Serializable {
     @Id
     @Column(name = "FFSP_ID")
-    @TableGenerator(name = "FFS_PRODUCT_GENERATOR", table ="SEQUENCE_TABLE", pkColumnName = "SEQ_NAME",
-        valueColumnName = "SEQ_COUNT", pkColumnValue = "FFS_PRODUCT_SEQ", allocationSize = 1)
+    @TableGenerator(name = "FFS_PRODUCT_GENERATOR", table = "SEQUENCE_TABLE", pkColumnName = "SEQ_NAME",
+            valueColumnName = "SEQ_COUNT", pkColumnValue = "FFS_PRODUCT_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FFS_PRODUCT_GENERATOR")
     private BigInteger id;
 
@@ -55,6 +55,10 @@ public class Product implements Serializable {
 
     @Column(name = "FFSP_IMAGE")
     private String image;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "FFSPT_ID", referencedColumnName = "FFSPT_ID", nullable = false)
+    private ProductType typeProduct;
 
     @Version
     @Column(name = "VERSION")
